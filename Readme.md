@@ -12,7 +12,7 @@ Uno script Bash semplice e veloce per convertire tutte le immagini `.jpg`, `.jpe
 Apri il terminale e lancia:
 
 ```bash
-sudo curl -fsSL https://raw.githubusercontent.com/2mcreations/WebpConverter/refs/heads/main/install-webpconvert.sh | bash
+curl -fsSL https://raw.githubusercontent.com/2mcreations/WebpConverter/refs/heads/main/install-webpconvert.sh | bash
 ```
 
 ## 🛠️ Requisiti
