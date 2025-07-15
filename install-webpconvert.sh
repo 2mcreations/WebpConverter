@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # URL del file webpconvert
-SCRIPT_URL="https://raw.githubusercontent.com/2mcreations/WebpConverter/refs/heads/main/webpconvert"
+SCRIPT_URL="https://raw.githubusercontent.com/mattia/webp-tools/main/webpconvert"
 
 # Destinazione
 DEST="/usr/local/bin/webpconvert"
