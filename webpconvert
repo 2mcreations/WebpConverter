@@ -1,0 +1,49 @@
+#!/bin/bash
+
+echo "🔄 Avvio conversione in WebP..."
+
+# Verifica se 'cwebp' è disponibile
+if ! command -v cwebp >/dev/null 2>&1; then
+  echo "⚠️  'cwebp' non è installato. Installazione in corso..."
+
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "❌ Homebrew non è installato. Visita https://brew.sh per installarlo."
+    exit 1
+  fi
+
+  brew install webp || {
+    echo "❌ Errore durante l'installazione di 'webp'."
+    exit 1
+  }
+
+  echo "✅ 'cwebp' installato correttamente!"
+fi
+
+# Directory di lavoro
+dir="${1:-.}"
+
+if [ ! -d "$dir" ]; then
+  echo "❌ '$dir' non è una directory valida."
+  exit 1
+fi
+
+# Tipi di file compatibili
+extensions=("jpg" "jpeg" "png")
+
+converted_any=0
+
+for ext in "${extensions[@]}"; do
+  for file in "$dir"/*.$ext; do
+    [[ -e "$file" ]] || continue
+    [ -f "$file" ] || continue
+
+    base="${file%.*}"
+    echo "✅ Convertendo: $file → $base.webp"
+    cwebp -quiet "$file" -o "$base.webp"
+    converted_any=1
+  done
+done
+
+if [ "$converted_any" -eq 0 ]; then
+  echo "ℹ️  Nessun file immagine (.jpg, .jpeg, .png) trovato in '$dir'."
+fi
