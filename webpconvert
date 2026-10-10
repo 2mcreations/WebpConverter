@@ -57,7 +57,7 @@ def generate_ai(image_path):
     )
 
     payload = {
-        "model": "openrouter/auto",
+        "model": "pplx-web/pplx-opus",
         "messages": [{
             "role": "user",
             "content": [
@@ -157,8 +157,12 @@ def main():
 
         # Se già webp e senza rimozione sfondo -> copia diretta, no ricompressione
         if is_already_webp and not args.bg:
-            print(f"✅ Copio e aggiorno metadata → {w_path}")
-            shutil.copy2(target_file, w_path)
+            if args.ai and not meta:
+                print(f"⚠️ AI fallita, non faccio nulla")
+                #subprocess.run(["cwebp", "-quiet", target_file, "-o", w_path])
+            else:
+                print(f"✅ Copio e aggiorno metadata → {w_path}")
+                shutil.copy2(target_file, w_path)
         else:
             print(f"✅ Convertendo → {w_path}")
             subprocess.run(["cwebp", "-quiet", target_file, "-o", w_path])
