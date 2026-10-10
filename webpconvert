@@ -57,7 +57,7 @@ def generate_ai(image_path):
     )
 
     payload = {
-        "model": "pplx-web/pplx-opus",
+        "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
         "messages": [{
             "role": "user",
             "content": [
